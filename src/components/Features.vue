@@ -7,32 +7,14 @@
       </div>
         <br><br><br>
       <div class="grid md:grid-cols-3 sm:grid-cols-1 md:gap-5 sm:gap-2">
-          <div class="styled-cols" aos-init aos-animate data-aos="fade-up" data-aos-delay="100" >
+          <div class="styled-cols" v-for="skillareas in skillareas" :key="skillareas.id" aos-init aos-animate data-aos="fade-up" data-aos-delay="100" >
               <div class="rn-service">
                   <div class="svg-ico"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
                     <br>
-                    <h2 class="text-2xl font-bold">Web Development</h2>
+                    <h2 class="text-2xl font-bold">{{skillareas.skill_area_name}}</h2>
                     <br>
-                    <p>I like to code things from scratch, and enjoy bringing ideas to life in the browser.</p>
+                    <p>{{skillareas.skill_area_description}}</p>
                     <!-- <div class="text-center arrow-icon"><i class="fas fa-3x fa-angle-right"></i></div> -->
-              </div>
-          </div>
-          <div class="styled-cols " aos-init aos-animate data-aos="fade-up" data-aos-delay="300" >
-              <div class="rn-service ">
-                  <div class="svg-ico"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
-                    <br>
-                    <h2 class="text-2xl font-bold">UI/UX Design</h2>
-                    <br>
-                    <p>I value simple content structure, clean design patterns, and thoughtful interactions.</p>
-              </div>
-          </div>
-          <div class="styled-cols" aos-init aos-animate data-aos="fade-up" data-aos-delay="500" >
-              <div class="rn-service ">
-                  <div class="svg-ico"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
-                    <br>
-                    <h2 class="text-2xl font-bold">Graphics Design</h2>
-                    <br>
-                    <p>I combine graphic design and illustration to help truly bring your brand to life.</p>
               </div>
           </div>
 
@@ -72,8 +54,25 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-name:"Features"
+name:"Features",
+data() {
+    return{
+        skillareas: [],
+    }
+},
+mounted() {
+    let self = this
+      axios.get('https://genesisapi.up.railway.app/1/myskillareas')
+      .then(function (response) {
+        self.skillareas = response.data;
+        console.log(self.skillareas)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
 }
 </script>
 
