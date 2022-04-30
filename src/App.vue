@@ -1,30 +1,44 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+  <Home/>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
+import Home from './views/Home.vue'
+export default {
+  components:{
+    Home
+  },
+    created(){
+    AOS.init();
+  },
+}
+</script>
+
+<style>
+hr {
+  border: 1px solid #121415;
+}
+.container1{
+  padding-left:40px;
+  margin-right: 43px;
 }
 
-#nav {
-  padding: 30px;
+.upBtn{
+  z-index: 100 !important;
+  background: #212428;
+  position: absolute;
+  right: 2vh;
+  bottom: 2vw;
+  box-shadow: 10px 10px 19px #1c1e22,-10px -10px 19px #262a2e;
+  cursor:none
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.upBtn:hover{
+  color: #F9004D;
+  transform: translateY(-3px);
+transition: .4s ease-in-out;
+background: rgb(24, 24, 24);
 }
 </style>
