@@ -6,20 +6,20 @@
     </div>
 
     <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-9 mx-5 md:mx-0 mt-20">
-        <div   aos-init aos-animate data-aos="fade-up" data-aos-delay="100">
-          <div class="card rounded-lg shadow-lg">
+        <div v-for="projects in projects" :key="projects.id" aos-init aos-animate data-aos="fade-up" data-aos-delay="100">
+          <div class="card rounded-lg shadow-lg w-full">
           <div class="cardImg">
             <img
-              src="../assets/images/moneylegos.png"
-              alt=""
-              class="rounded-t-lg cardImg-2"
+              :src="projects.project_icon"
+              :alt="projects.project_name"
+              class="rounded-t-lg cardImg-2 m-auto"
             />
           </div>
           <div class="pt-5">
-            <span class="subtitle1 mb-3">WEB DEVELOPMENT</span>
+            <span class="subtitle1 mb-3">{{projects.project_skill_area}}</span>
             <div class="subtitle3">
-                <a href="https://moneylegos.fi/" target="__blank" class="mb-2"
-              >Moneylegos</a
+                <a :href="projects.project_links" target="__blank" class="mb-2"
+              >{{projects.project_name}}</a
             >
             <i class="fa fa-arrow-right arrow pl-2" aria-hidden="true"></i>
             </div>
@@ -47,27 +47,6 @@
           </div>
         </div>
         </div> -->
-
-        <div  aos-init aos-animate data-aos="fade-up" data-aos-delay="500">
-          <div class="card rounded-lg shadow-lg w-full">
-          <div class="cardImg">
-            <img
-              src="../assets/images/logo.jpg"
-              alt=""
-              class="rounded-t-lg cardImg-2 mx-auto"
-            />
-          </div>
-          <div class="pt-5">
-            <span class="subtitle1 mb-3">WEB DEVELOPMENT</span>
-            <div class="subtitle3">
-                <a href="https://romantic-curie-3cc128.netlify.app/" target="__blank" class="mb-2"
-              >Furniture Club BD</a
-            >
-            <i class="fa fa-arrow-right arrow pl-2" aria-hidden="true"></i>
-            </div>
-          </div>
-        </div>
-        </div>
 
         <!-- <div   aos-init aos-animate data-aos="fade-up" data-aos-delay="100">
           <div class="card rounded-lg shadow-lg">
@@ -141,8 +120,25 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: "Portfolio",
+  data() {
+    return{
+        projects: [],
+    }
+},
+  mounted() {
+    let self = this
+      axios.get('https://genesisapi.up.railway.app/1/myprojects')
+      .then(function (response) {
+        self.projects = response.data;
+        console.log(self.projects)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
 };
 </script>
 
@@ -216,6 +212,7 @@ h1 {
 
 .cardImg-2{
   padding-top: 20%;
+  max-height: 230px;
 }
 .cardImg-1{
   padding-top: 25%;

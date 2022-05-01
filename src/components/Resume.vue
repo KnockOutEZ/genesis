@@ -31,101 +31,17 @@
     </div>
 
     <div v-if="tab == 'professional'">
-      <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-9 m-5 md:m-0">
+      <!-- grid md:grid-cols-2 sm:grid-cols-1 gap-9 -->
+      <div class=" m-5 md:m-0">
         <div class="wrapper">
           <h2></h2>
-          <div class="skills">
+          <div v-for="skills in skills" :key="skills.id" class="skills">
             <div class="details">
-              <span>HTML</span>
-              <span>75%</span>
+              <span>{{skills.skill_name}}</span>
+              <span>{{skills.skill_progress}}</span>
             </div>
             <div class="bar">
-              <div id="html-bar"></div>
-            </div>
-          </div>
-          <div class="skills">
-            <div class="details">
-              <span>CSS</span>
-              <span>75%</span>
-            </div>
-            <div class="bar">
-              <div id="css-bar"></div>
-            </div>
-          </div>
-          <div class="skills">
-            <div class="details">
-              <span>Javascript</span>
-              <span>65%</span>
-            </div>
-            <div class="bar">
-              <div id="javascript-bar"></div>
-            </div>
-          </div>
-          <div class="skills">
-            <div class="details">
-              <span>jQuery</span>
-              <span>50%</span>
-            </div>
-            <div class="bar">
-              <div id="jQuery-bar"></div>
-            </div>
-          </div>
-          <div class="skills">
-            <div class="details">
-              <span>Vue Js</span>
-              <span>60%</span>
-            </div>
-            <div class="bar">
-              <div id="vuejs-bar"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="wrapper">
-          <h2></h2>
-          <div class="skills">
-            <div class="details">
-              <span>Bootstrap</span>
-              <span>75%</span>
-            </div>
-            <div class="bar">
-              <div id="bootstrap-bar"></div>
-            </div>
-          </div>
-          <div class="skills">
-            <div class="details">
-              <span>Tailwind CSS</span>
-              <span>75%</span>
-            </div>
-            <div class="bar">
-              <div id="tailwind-bar"></div>
-            </div>
-          </div>
-          <div class="skills">
-            <div class="details">
-              <span>Photoshop</span>
-              <span>68%</span>
-            </div>
-            <div class="bar">
-              <div id="ps-bar"></div>
-            </div>
-          </div>
-          <div class="skills">
-            <div class="details">
-              <span>Illustrator</span>
-              <span>68%</span>
-            </div>
-            <div class="bar">
-              <div id="illustrator-bar"></div>
-            </div>
-          </div>
-          <div class="skills">
-            <div class="details">
-              <span>SASS</span>
-              <span>65%</span>
-            </div>
-            <div class="bar">
-              <div id="sass-bar"></div>
+              <div id="" :style="{width:skills.skill_progress}"></div>
             </div>
           </div>
         </div>
@@ -134,11 +50,11 @@
 
     <div v-if="tab == 'education'">
       <div class="grid sm:grid-cols-1 md:grid-cols-2 mt-10 gap-9 mx-5 md:mx-0">
-        <div aos-init aos-animate data-aos="fade-up" data-aos-delay="300">
+        <div v-for="educations in educations" :key="educations.id" aos-init aos-animate data-aos="fade-up" data-aos-delay="300">
           <div class="rn-service">
             <div class="heading">
-              <h3>Adamjee Cantonment College</h3>
-              <span class="sub">JSC (2017-2017)</span>
+              <h3>{{educations.institution_name}}</h3>
+              <span class="sub">{{educations.education_level}} ({{educations.education_period_from}}-{{educations.education_period_to}})</span>
             </div>
 
             <br /><br />
@@ -146,26 +62,7 @@
             <br />
 
             <p class="inner">
-              My personal philosophy when it comes to education and learning is
-              closely related to several cognitive theories of motivation.
-            </p>
-          </div>
-        </div>
-
-        <div aos-init aos-animate data-aos="fade-up" data-aos-delay="100">
-          <div class="rn-service">
-            <div class="heading">
-              <h3>Greenfield School & College</h3>
-              <span class="sub">SSC (2018-2020)</span>
-            </div>
-
-            <br /><br />
-            <hr />
-            <br />
-
-            <p class="inner">
-              Learning is complex phenomena,learning can be fine example of
-              vertical progress or example of horizontal progress.
+              {{educations.study_motivation}}
             </p>
           </div>
         </div>
@@ -208,11 +105,11 @@
 
     <div v-if="tab == 'experience'">
       <div class="grid sm:grid-cols-1 md:grid-cols-2 mt-10 gap-9 mx-5 md:mx-0">
-        <div aos-init aos-animate data-aos="fade-up" data-aos-delay="100">
+        <div v-for="experience in experience" :key="experience.id" aos-init aos-animate data-aos="fade-up" data-aos-delay="100">
           <div class="rn-service">
             <div class="heading">
-              <h3>Techynaf Technologies Limited</h3>
-              <span class="sub">Front End Web Developer</span>
+              <h3>{{experience.institution_name}}</h3>
+              <span class="sub">{{experience.responsibility_level}}</span>
             </div>
 
             <br /><br />
@@ -220,8 +117,7 @@
             <br />
 
             <p class="inner">
-              Techynaf is a Dhaka based tech startup company aims to provide
-              top-notch IT solutions to local and international customers.
+              {{experience.institution_description}}
             </p>
           </div>
         </div>
@@ -292,17 +188,66 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: "Resume",
   data() {
     return {
       tab: "education",
+      educations:[],
+      skills:[],
+      experience:[],
     };
   },
+  mounted() {
+    let self = this
+      axios.get('https://genesisapi.up.railway.app/1/myeducation')
+      .then(function (response) {
+        self.educations = response.data;
+        console.log(self.educations)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+      axios.get('https://genesisapi.up.railway.app/1/myskills')
+      .then(function (response) {
+        self.skills = response.data;
+        console.log(self.skills)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+      axios.get('https://genesisapi.up.railway.app/1/myprofessional')
+      .then(function (response) {
+        self.experience = response.data;
+        console.log(self.experience)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
 };
 </script>
 
 <style scoped>
+@-webkit-keyframes bar {
+   0% { width: 0; }
+}
+@-moz-keyframes bar {
+   0% { width: 0; }
+}
+@keyframes bar {
+   0% { width: 0; }
+}
+
+.bar > div { 
+  -webkit-animation: bar 2s;
+  -moz-animation: bar 2s;
+  animation: bar 2s;
+}
+
 .rn-service:hover > .inner {
   color: #ffffff;
 }
