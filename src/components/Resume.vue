@@ -33,8 +33,8 @@
     <div v-if="tab == 'professional'">
       <!-- grid md:grid-cols-2 sm:grid-cols-1 gap-9 -->
       <div class=" m-5 md:m-0">
-        <div class="wrapper">
-          <h2></h2>
+        <div class="wrapper grid md:grid-cols-2 sm:grid-cols-1 gap-9 mt-5">
+          <!-- <h2></h2> -->
           <div v-for="skills in skills" :key="skills.id" class="skills">
             <div class="details">
               <span>{{skills.skill_name}}</span>
