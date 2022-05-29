@@ -8,13 +8,6 @@
 
     <div class="grid sm:grid-cols-1 md:grid-cols-3 bar1">
       <button
-        @click="tab = 'education'"
-        :class="{ active: tab == 'education' }"
-        class="py-8 rounded-lg navBtn width"
-      >
-        Education
-      </button>
-      <button
         @click="tab = 'professional'"
         :class="{ active: tab == 'professional' }"
         class="py-8 rounded-lg navBtn width"
@@ -27,6 +20,13 @@
         class="py-8 rounded-lg navBtn width"
       >
         Experience
+      </button>
+      <button
+        @click="tab = 'education'"
+        :class="{ active: tab == 'education' }"
+        class="py-8 rounded-lg navBtn width"
+      >
+        Education
       </button>
     </div>
 
@@ -110,6 +110,8 @@
             <div class="heading">
               <h3>{{experience.institution_name}}</h3>
               <span class="sub">{{experience.responsibility_level}}</span>
+              <br>
+              <span class="sub">({{skills.job_experience_from}} - {{skills.job_experience_to}})</span>
             </div>
 
             <br /><br />
