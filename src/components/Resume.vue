@@ -195,7 +195,7 @@ export default {
   name: "Resume",
   data() {
     return {
-      tab: "skills",
+      tab: "professional",
       educations:[],
       skills:[],
       experience:[],
