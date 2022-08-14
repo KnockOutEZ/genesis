@@ -130,7 +130,7 @@ export default {
 },
   mounted() {
     let self = this
-      axios.get('https://genesisapi.up.railway.app/1/myprojects')
+      axios.get('https://go-smtp-client.herokuapp.com/1/myprojects')
       .then(function (response) {
         self.projects = response.data;
         console.log(self.projects)

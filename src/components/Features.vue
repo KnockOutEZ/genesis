@@ -64,7 +64,7 @@ data() {
 },
 mounted() {
     let self = this
-      axios.get('https://genesisapi.up.railway.app/1/myskillareas')
+      axios.get('https://go-smtp-client.herokuapp.com/1/myskillareas')
       .then(function (response) {
         self.skillareas = response.data;
         console.log(self.skillareas)

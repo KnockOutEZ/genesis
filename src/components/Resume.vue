@@ -203,7 +203,7 @@ export default {
   },
   mounted() {
     let self = this
-      axios.get('https://genesisapi.up.railway.app/1/myeducation')
+      axios.get('https://go-smtp-client.herokuapp.com/1/myeducation')
       .then(function (response) {
         self.educations = response.data;
         console.log(self.educations)
@@ -212,7 +212,7 @@ export default {
         console.log(error);
       });
 
-      axios.get('https://genesisapi.up.railway.app/1/myskills')
+      axios.get('https://go-smtp-client.herokuapp.com/1/myskills')
       .then(function (response) {
         self.skills = response.data;
         console.log(self.skills)
@@ -221,7 +221,7 @@ export default {
         console.log(error);
       });
 
-      axios.get('https://genesisapi.up.railway.app/1/myprofessional')
+      axios.get('https://go-smtp-client.herokuapp.com/1/myprofessional')
       .then(function (response) {
         self.experience = response.data;
         console.log(self.experience)
