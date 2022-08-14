@@ -111,7 +111,7 @@
               <h3>{{experience.institution_name}}</h3>
               <span class="sub">{{experience.responsibility_level}}</span>
               <br>
-              <span class="sub">({{skills.job_experience_from}} - {{skills.job_experience_to}})</span>
+              <span class="sub">({{experience.job_experience_from}} - {{experience.job_experience_to}})</span>
             </div>
 
             <br /><br />
