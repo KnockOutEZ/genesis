@@ -18,14 +18,14 @@
         </div>
         <div class="pt-5">
           <h4>Towhid Khan</h4>
-          <p class="mb-5">Front End Web Developer</p>
+          <p class="mb-5">Web Developer</p>
           <p class="mb-5">
             I am available for freelance work. Connect with me via and call in
             to my account.
           </p>
 
           <p>
-            Phone: <a class="p" href="tel:+8801819415290">+8801819415290</a>
+            Phone: <a class="p" href="tel:+8801979415290">+8801979415290</a>
           </p>
           <p>
             Email:
@@ -84,7 +84,7 @@
 
       <br><br><br><br>
         <h1 class="text-center">Genesis</h1>
-        <p class="text-center">© 2021. All rights reserved</p>
+        <p class="text-center">© 2022. All rights reserved</p>
       <br><br><br><br><br>
 </template>
 
