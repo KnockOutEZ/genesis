@@ -18,7 +18,7 @@
         </div>
         <div class="pt-5">
           <h4>Towhid Khan</h4>
-          <p class="mb-5">Web Developer</p>
+          <p class="mb-5">Software Developer</p>
           <p class="mb-5">
             I am available for freelance work. Connect with me via and call in
             to my account.

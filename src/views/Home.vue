@@ -22,7 +22,7 @@
               ><span class="cursor1">&nbsp;</span>
             </p>
           </div>
-          <p >I am a Front End Web Developer.I enjoy using my skills to contribute to the exciting technological
+          <p >I am a Software Developer.I enjoy using my skills to contribute to the exciting technological
 advances that happen every day.</p>
 
     <div class=" mt-20 find scrollme">
