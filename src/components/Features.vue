@@ -11,9 +11,9 @@
               <div class="rn-service">
                   <div class="svg-ico"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
                     <br>
-                    <h2 class="text-2xl font-bold">{{skillareas.skill_area_name}}</h2>
+                    <h2 class="text-2xl font-bold">{{skillareas.Title}}</h2>
                     <br>
-                    <p>{{skillareas.skill_area_description}}</p>
+                    <p>{{skillareas.Description}}</p>
                     <!-- <div class="text-center arrow-icon"><i class="fas fa-3x fa-angle-right"></i></div> -->
               </div>
           </div>
@@ -54,25 +54,14 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
 name:"Features",
-data() {
-    return{
-        skillareas: [],
+props: {
+    skillareas: {
+      type: Array,
+      required: true
     }
-},
-mounted() {
-    let self = this
-      axios.get('https://genesisrestapi.herokuapp.com/1/myskillareas')
-      .then(function (response) {
-        self.skillareas = response.data;
-        console.log(self.skillareas)
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    }
+  },
 }
 </script>
 

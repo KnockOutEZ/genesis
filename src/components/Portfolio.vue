@@ -10,16 +10,16 @@
           <div class="card rounded-lg shadow-lg w-full">
           <div class="cardImg">
             <img
-              :src="projects.project_icon"
-              :alt="projects.project_name"
+              :src="projects.icon"
+              :alt="projects.name"
               class="rounded-t-lg cardImg-2 m-auto"
             />
           </div>
           <div class="pt-5">
-            <span class="subtitle1 mb-3">{{projects.project_skill_area}}</span>
+            <span class="subtitle1 mb-3">{{projects.techs}}</span>
             <div class="subtitle3">
-                <a :href="projects.project_links" target="__blank" class="mb-2"
-              >{{projects.project_name}}</a
+                <a :href="projects.link" target="__blank" class="mb-2"
+              >{{projects.name}}</a
             >
             <i class="fa fa-arrow-right arrow pl-2" aria-hidden="true"></i>
             </div>
@@ -120,25 +120,14 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   name: "Portfolio",
-  data() {
-    return{
-        projects: [],
+  props: {
+    projects:{
+      type: Array,
+      required: true,
     }
-},
-  mounted() {
-    let self = this
-      axios.get('https://genesisrestapi.herokuapp.com/1/myprojects')
-      .then(function (response) {
-        self.projects = response.data;
-        console.log(self.projects)
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    }
+  }
 };
 </script>
 

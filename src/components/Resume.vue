@@ -37,11 +37,11 @@
           <!-- <h2></h2> -->
           <div v-for="skills in skills" :key="skills.id" class="skills">
             <div class="details">
-              <span>{{skills.skill_name}}</span>
-              <span>{{skills.skill_progress}}</span>
+              <span>{{ skills.name }}</span>
+              <span>{{ skills.progress }}</span>
             </div>
             <div class="bar">
-              <div id="" :style="{width:skills.skill_progress}"></div>
+              <div id="" :style="{ width: skills.progress }"></div>
             </div>
           </div>
         </div>
@@ -50,11 +50,22 @@
 
     <div v-if="tab == 'education'">
       <div class="grid sm:grid-cols-1 md:grid-cols-2 mt-10 gap-9 mx-5 md:mx-0">
-        <div v-for="educations in educations" :key="educations.id" aos-init aos-animate data-aos="fade-up" data-aos-delay="300">
+        <div
+          v-for="educations in educations"
+          :key="educations.id"
+          aos-init
+          aos-animate
+          data-aos="fade-up"
+          data-aos-delay="300"
+        >
           <div class="rn-service">
             <div class="heading">
-              <h3>{{educations.institution_name}}</h3>
-              <span class="sub">{{educations.education_level}} ({{educations.education_period_from}}-{{educations.education_period_to}})</span>
+              <h3>{{ educations.name }}</h3>
+              <span class="sub"
+                >{{ educations.level }} ({{
+                  educations["duration-start"]
+                }}-{{ educations["duration-end"] }})</span
+              >
             </div>
 
             <br /><br />
@@ -62,7 +73,7 @@
             <br />
 
             <p class="inner">
-              {{educations.study_motivation}}
+              {{ educations.description }}
             </p>
           </div>
         </div>
@@ -105,13 +116,23 @@
 
     <div v-if="tab == 'experience'">
       <div class="grid sm:grid-cols-1 md:grid-cols-2 mt-10 gap-9 mx-5 md:mx-0">
-        <div v-for="experience in experience" :key="experience.id" aos-init aos-animate data-aos="fade-up" data-aos-delay="100">
+        <div
+          v-for="experience in experience"
+          :key="experience.id"
+          aos-init
+          aos-animate
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
           <div class="rn-service">
             <div class="heading">
-              <h3>{{experience.institution_name}}</h3>
-              <span class="sub">{{experience.responsibility_level}}</span>
-              <br>
-              <span class="sub">({{experience.job_experience_from}} - {{experience.job_experience_to}})</span>
+              <h3>{{ experience.name }}</h3>
+              <span class="sub">{{ experience.role }}</span>
+              <br />
+              <span class="sub"
+                >({{ experience["duration-start"] }} -
+                {{ experience["duration-end"] }})</span
+              >
             </div>
 
             <br /><br />
@@ -119,7 +140,7 @@
             <br />
 
             <p class="inner">
-              {{experience.institution_description}}
+              {{ experience.description }}
             </p>
           </div>
         </div>
@@ -190,61 +211,48 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   name: "Resume",
+  props: {
+    educations: {
+      type: Array,
+      required: true,
+    },
+    skills: {
+      type: Array,
+      required: true,
+    },
+    experience: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {
       tab: "professional",
-      educations:[],
-      skills:[],
-      experience:[],
     };
   },
-  mounted() {
-    let self = this
-      axios.get('https://genesisrestapi.herokuapp.com/1/myeducation')
-      .then(function (response) {
-        self.educations = response.data;
-        console.log(self.educations)
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-      axios.get('https://genesisrestapi.herokuapp.com/1/myskills')
-      .then(function (response) {
-        self.skills = response.data;
-        console.log(self.skills)
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-      axios.get('https://genesisrestapi.herokuapp.com/1/myprofessional')
-      .then(function (response) {
-        self.experience = response.data;
-        console.log(self.experience)
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    }
 };
 </script>
 
 <style scoped>
 @-webkit-keyframes bar {
-   0% { width: 0; }
+  0% {
+    width: 0;
+  }
 }
 @-moz-keyframes bar {
-   0% { width: 0; }
+  0% {
+    width: 0;
+  }
 }
 @keyframes bar {
-   0% { width: 0; }
+  0% {
+    width: 0;
+  }
 }
 
-.bar > div { 
+.bar > div {
   -webkit-animation: bar 2s;
   -moz-animation: bar 2s;
   animation: bar 2s;
@@ -478,7 +486,7 @@ h2 {
   transform: translateY(-5px);
 }
 
-button{
+button {
   cursor: none;
 }
 </style>
