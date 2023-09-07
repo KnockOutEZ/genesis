@@ -1,7 +1,5 @@
 # Genesis
 
-# Prerequisites
-Nodejs version 14.21.3 (lts/fermium)
 ## Project setup
 ```
 npm install
